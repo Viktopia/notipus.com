@@ -38,6 +38,7 @@ jobs:
           cp index.html _site/
           cp form.html _site/
           cp -r img _site/
+          cp -r js _site/
           mkdir -p _site/css
           cp css/style.css _site/css/
 

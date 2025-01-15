@@ -4,29 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Started - Notipus</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#fff7ed',
-                            100: '#ffedd5',
-                            200: '#ffd7aa',
-                            300: '#ffb77a',
-                            400: '#ff8c3c',
-                            500: '#ff6601',
-                            600: '#f05800',
-                            700: '#c44600',
-                            800: '#9c3800',
-                            900: '#7c2d00',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body class="bg-gray-50">
@@ -103,9 +80,16 @@
         </div>
     </footer>
 
+    <script src="js/analytics.js"></script>
     <script>
         document.getElementById('signupForm').addEventListener('submit', async function(e) {
             e.preventDefault();
+
+            // Track form submission attempt
+            trackEvent('form_submit', {
+                page: 'form',
+                status: 'attempt'
+            });
 
             // Show loading state
             const submitButton = this.querySelector('button[type="submit"]');
@@ -135,11 +119,24 @@
                     }
                 });
 
+                // Track successful submission
+                trackEvent('form_submit', {
+                    page: 'form',
+                    status: 'success'
+                });
+
                 // Since we're using no-cors, we won't get a readable response
                 // We'll assume success if we get here
                 alert('Thank you for your submission!');
                 window.location.href = '/';
             } catch (error) {
+                // Track failed submission
+                trackEvent('form_submit', {
+                    page: 'form',
+                    status: 'error',
+                    error: error.message || 'Unknown error'
+                });
+
                 console.error('Error:', error);
                 alert('There was an error submitting the form. Please try again.');
             } finally {
