@@ -2,6 +2,8 @@
 
 Notipus is a real-time customer intelligence platform that sends instant, contextual notifications to Slack about customer events from various services.
 
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Viktopia/notipus)
+
 ## Development
 
 First, install dependencies:
